@@ -33,14 +33,13 @@ class MahasiswaController extends Controller
 
         $request->validate(
           [
-              'npm'=>'required|unique:mahasiswa',
+              'npm'=>'required',
               'nama'=>'required',
               'nohp'=>'required',
               'alamat'=>'required',
           ],
           [
               'npm.required'=>'NPM is Required *',
-              'npm.unique'=>'Mahasiswa is Already Exists',
               'nama.required'=>'Nama is Required *',
               'nohp.required'=>'No HP is Required *',
               'alamat.required'=>'Alamat is Required *',

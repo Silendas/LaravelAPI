@@ -115,12 +115,12 @@
             $('#ModalTambahMahasiwa').on('shown.bs.modal', function() {
                 $('[name="npm"]').focus()
             })
-        }
+        };
 
         function ModalHapusMahasiwa($id) {
             $('[name="npm_d"]').val($id);
             $('#ModalHapusMahasiwa').modal('show');
-        }
+        };
 
         function ModalEditMahasiwa(id, nama, nohp, alamat) {
 
@@ -131,16 +131,10 @@
             $('#ModalEditMahasiwa').modal('show');
 
             $('#ModalEditMahasiwa').on('shown.bs.modal', function() {
-                $('[name="n_mahasiswa"]').focus()
+                $('[name="n_mahasiswa_e"]').focus()
             })
 
-        }
-
-        function LoadData() {
-            $.get("{{ url('mahasiswa/tampilkan') }}", {}, function(mahasiswa, status) {
-                $('#loaddata').html(mahasiswa);
-            })
-        }
+        };
 
         $("#btn-tambah").on('click', function() {
             let npm = $('[name="npm"]').val();
@@ -220,6 +214,12 @@
                 },
             });
         });
+
+        function LoadData() {
+            $.get("{{ url('mahasiswa/tampilkan') }}", {}, function(mahasiswa, status) {
+                $('#loaddata').html(mahasiswa);
+            })
+        };
 
         $('#btn-batal').on('click', function() {
             $('#errMsg').html('')
