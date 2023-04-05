@@ -14,7 +14,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Form Tambah</h5>
-                        <button type="button" id="btn-batal" class="btn-close" data-bs-dismiss="modal"
+                        <button type="button" onclick="Batal()" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -39,8 +39,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" id="btn-batal"
-                            data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-secondary" onclick="Batal()" data-bs-dismiss="modal" id="btn-batal">Batal</button>
                         <input type="button" class="btn btn-primary" id="btn-tambah" value="Simpan">
                     </div>
                 </div>
@@ -56,12 +55,14 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Form Hapus</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" id="btn-batal" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">Data yang dihapus tidak akan bisa dikembalikan.</div>
                     <div class="modal-footer">
                         <input type="hidden" name="npm_d">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Batal</button>
                         <input type="button" class="btn btn-primary" id="btn-delete" value="Hapus">
                     </div>
                 </div>
@@ -77,7 +78,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Form Ubah</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
 
@@ -101,7 +103,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Batal</button>
                         <input type="button" class="btn btn-primary" id="btn-ubah" value="Ubah">
                     </div>
                 </div>
@@ -162,7 +165,8 @@
                 error: function(err) {
                     let error = err.responseJSON;
                     $.each(error.errors, function(index, value) {
-                        $('#errMsg').append('<span class="text-danger">' + value + '</span><br>')
+                        $('#errMsg').append('<span class="text-danger">' + value +
+                            '</span><br>')
                     });
                 },
             });
@@ -173,7 +177,9 @@
             $.ajax({
                 method: 'DELETE',
                 url: "{{ route('mahasiswa/hapus') }}",
-                data: {npm: npm},
+                data: {
+                    npm: npm
+                },
                 success: function() {
                     $('[name="npm_d"]').val('');
                     $('#ModalHapusMahasiwa').modal('hide');
@@ -187,7 +193,7 @@
             let nama = $('[name="n_mahasiswa_e"]').val();
             let nohp = $('[name="hp_mahasiswa_e"]').val();
             let alamat = $('[name="a_mahasiswa_e"]').val();
-            console.log(npm+nama+alamat+nohp);
+            console.log(npm + nama + alamat + nohp);
             $.ajax({
                 method: 'PUT',
                 url: "{{ route('mahasiswa/edit') }}",
@@ -209,7 +215,8 @@
                 error: function(err) {
                     let error = err.responseJSON;
                     $.each(error.errors, function(index, value) {
-                        $('#errMsg_e').append('<span class="text-danger">' + value + '</span><br>')
+                        $('#errMsg_e').append('<span class="text-danger">' + value +
+                            '</span><br>')
                     });
                 },
             });
@@ -221,8 +228,12 @@
             })
         };
 
-        $('#btn-batal').on('click', function() {
+        function Batal() {
+            $('[name="npm"]').val('');
+            $('[name="n_mahasiswa"]').val('');
+            $('[name="hp_mahasiswa"]').val('');
+            $('[name="a_mahasiswa"]').val('');
             $('#errMsg').html('')
-        });
+        };
     </script>
 @endsection
